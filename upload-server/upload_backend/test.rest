@@ -1,0 +1,8 @@
+###
+POST  http://localhost:8000/api/user_create
+Content-Type:  application/json
+
+
+###
+GET http://localhost:8000/api/user_read
+Content-Type:  application/json

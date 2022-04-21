@@ -1,0 +1,17 @@
+###
+GET http://localhost:9000/
+
+###
+POST  http://localhost:9000/user_register?username=aldodevv&password=1qazxsw2&status=true
+
+###
+POST http://localhost:9000/user_register/aldodevv/qwertty
+
+###
+POST  http://localhost:9000/user_login
+Content-Type: application/json
+
+{
+  "username" : "anjayani",
+  "password" : "1qazxsw2"
+}

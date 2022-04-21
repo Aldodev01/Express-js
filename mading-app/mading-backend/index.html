@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="http://localhost:8080/user_add/" class="form_register">
+        <label for="username" id="username">username</label>
+        <input type="text" name="username" id="username" />
+
+        <label for="email" id="email">email</label>
+        <input type="email" name="email" id="email" />
+
+        <label for="password" id="password">password</label>
+        <input type="password" name="password" id="password" />
+
+        <button type="submit">submit</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>no</th>
+            <th>username</th>
+            <th>email</th>
+            <th>created at</th>
+          </tr>
+        </thead>
+        <tbody id="table_body"></tbody>
+      </table>
+    </div>
+
+    <script>
+      let tbody = document.getElementById("table_body");
+      window.handleDelete = (e) => {
+        window.location.href = `http://localhost:8080/user_delete/?id=${e}`;
+      };
+
+      fetch("http://localhost:8080/user_read", {
+        method: "get",
+        mode: "cors",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          result.map((e) => {
+            tbody.innerHTML += `
+          <tr>
+            <td>${e.id}</td>
+            <td>${e.username}</td>
+            <td>${e.email}</td>
+            <td>${new Date(e.createAd).toLocaleDateString()}</td>
+            <td> <button onClick="handleDelete(${e.id})">delete</button> </td>
+          </tr>
+          `;
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    </script>
+  </body>
+</html>
